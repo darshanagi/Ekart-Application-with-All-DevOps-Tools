@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-    SCANNER_HOME = tool 'sonar-token'
+    SCANNER_TOKEN = tool 'sonar-token'
 }
     tools {
         maven 'maven3'
