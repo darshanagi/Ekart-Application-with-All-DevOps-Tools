@@ -2,9 +2,8 @@ pipeline {
     agent any
 
     environment {
-        SCANNER_HOME = tool 'sonar-token' // Jenkins secret text credential
-    }
-
+    SONAR_TOKEN = credentials('sonar-token')
+}
     tools {
         maven 'maven3'
         jdk 'jdk-17'
