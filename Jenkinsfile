@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        SCANNER_HOME = tool 'sonar-scanner' // Jenkins secret text credential
+        SCANNER_HOME = tool 'sonar-token' // Jenkins secret text credential
     }
 
     tools {
