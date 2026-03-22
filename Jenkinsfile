@@ -2,8 +2,10 @@ pipeline {
     agent any
 
     environment {
-    SCANNER_TOKEN = credentials('sonar-token')
-}
+        SCANNER_HOME = tool 'sonar-scanner'
+        NVD_API_KEY = credentials('nvd-api-key')  // Jenkins secret text credential
+    }
+
     tools {
         maven 'maven3'
         jdk 'jdk-17'
@@ -12,7 +14,7 @@ pipeline {
     stages {
         stage('git checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/darshanagi/Ekart-Application-with-All-DevOps-Tools.git'
+                git branch: 'master', url: 'https://github.com/darshanagi/Ekart-Application-with-All-DevOps-Tools.git'
             }
         }
 
@@ -30,7 +32,7 @@ pipeline {
 
         stage('SonarQube analysis') {
             steps {
-                withSonarQubeEnv('sonar-token') {
+                withSonarQubeEnv('sonar-scanner') {
                     sh "${env.SCANNER_HOME}/bin/sonar-scanner \
                         -Dsonar.projectKey=EKART \
                         -Dsonar.projectName=EKART \
